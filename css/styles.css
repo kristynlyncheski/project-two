@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  /*width:100%;*/
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight:400;
+  text-align:center;
+}
+
+body {
+  background: #f8f4e3;
+}
+
+h1 {
+  font-family:'Londrina Outline', cursive;
+  color: #ff8966;
+  font-size:100px;
+}
+
+#search-button {
+  background:#4682a2;
+  color:#f8f4e3;
+  font-family:'Londrina Outline', cursive;
+  font-size: 50px;
+  border:none;
+  outline:none;
+  text-transform: lowercase;
+  padding:0 30px;
+  cursor:pointer;
+}
+
+
+.mult-matches {
+  display:flex;
+  flex-flow:row wrap;
+  justify-content:center;
+}
+.mult-matches-el {
+  width:20%;
+}
+
+.content-container {
+  display:flex;
+  flex-flow:row wrap;
+  justify-content:center;
+}
+
+.content-container > div {
+  width:20%;
+}

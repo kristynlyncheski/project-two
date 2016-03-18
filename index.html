@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>What Should I Watch Now?</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Londrina+Outline|Montserrat:400,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+
+    <!--start of container-->
+    <div class="container">
+      <header>
+        <h1>What Should I Watch Now?</h1>
+      </header>
+
+      <!--start of input container-->
+      <div class="input-container">
+
+        <form action="">
+
+          <label for="">
+            <input type="text" name="show-input" id="show-input" placeholder="Type in a show...">
+          </label>
+
+          <label for="">Choose Your Sources (Defaults to all)
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="amazon">Amazon Prime
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="hbo">HBO
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="hulu">Hulu
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="netflix">Netflix
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="showtime">Showtime
+          </label>
+
+          <br><br>
+
+          <label for="">
+            <button type="button" name="search-button" id="search-button">Search!</button>
+          </label>
+
+        </form>
+
+      </div>
+      <!--end of input container-->
+
+      <div class="number-viewers">
+        <p>Watching with a friend? Click here.</p>
+      </div>
+
+      <div class="notes-placeholder">
+      </div>
+
+      <div class="mult-matches-container">
+        <div class="how-many-mult"></div>
+        <div class="mult-matches"></div>
+      </div>
+
+
+      <!--start of content container-->
+      <div class="content-container">
+      </div>
+      <!--end of content container-->
+
+    </div>
+
+    <!--end of container-->
+
+
+
+    <!--script files go below-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+
+
+    <script type="text/javascript" src="./scripts/apiKey.js"></script>
+    <script type="text/javascript" src="./scripts/search.js"></script>
+    <script type="text/javascript" src="./scripts/similar.js"></script>
+    <script type="text/javascript" src="./scripts/main.js"></script>
+
+
+    <!--handlebars templates below-->
+
+    <script id="mult-matches-template" type="text/x-handlebars-template">
+      {{#each multiple}}
+      <div class="mult-matches-el" data-id="{{id}}">
+        <p><img src="{{thumbnail}}"</p>
+        <p>{{title}}</p>
+      </div>
+      {{/each}}
+    </script>
+
+    <script id="similar-results-template" type="text/x-handlebars-template">
+      {{#each similar}}
+      <div class="similar-results-el">
+        <p><img src="{{thumbnail}}"></p>
+        <p>{{title}}</p>
+      </div>
+      {{/each}}
+    </script>
+
+  </body>
+</html>
