@@ -2,9 +2,21 @@ document.addEventListener("DOMContentLoaded", function(event){
 
   var searchBtn = document.getElementById("search-button");
 
-  searchBtn.addEventListener("click",function(){
+  var inputBox = document.getElementById("show-input");
+
+  inputBox.addEventListener("keydown", function(e){
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      onSearchClick();
+      console.log("hello");
+    };
+  });
+
+  searchBtn.addEventListener("click", onSearchClick);
+
+  function onSearchClick() {
     // console.log("clicked");
-    var showInput = document.getElementById("show-input").value;
+    var showInput = inputBox.value;
     // console.log(showInput);
 
     if (showInput === "") {
@@ -12,22 +24,28 @@ document.addEventListener("DOMContentLoaded", function(event){
       return;
     } // if showInput is empty
 
+    availMatched = [];
+
+    howManyMult.innerHTML = "";
+    multMatchesInfo.innerHTML = "";
+    similarContent.innerHTML = "";
+    detailsContainer.innerHTML = "";
     notes.innerHTML = "<p>Searching...</p>";
 
     var sourcesInput = document.querySelectorAll(".source-checkbox:checked");
-    console.log("sourcesInput",sourcesInput);
+    // console.log("sourcesInput",sourcesInput);
     if (sourcesInput.length > 0){
       for (var i = 0; i < sourcesInput.length; i++){
-        sourcesArray.push(sourcesInput[i].value);
+        userSourceChoices.push(sourcesInput[i].value);
       };
     } else {
-      sourcesArray = ["amazon","hbo","hulu","netflix","showtime"];
+      userSourceChoices = defaultSources;
     }
 
-    console.log("sourcesArray",sourcesArray);
+    // console.log("userSourceChoices",userSourceChoices);
 
     search.onSearch(showInput);
 
-  });
+  };
 
 }); // end of DOMContentLoaded;

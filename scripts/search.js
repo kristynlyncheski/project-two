@@ -1,6 +1,7 @@
 var baseUrl = "http://api-public.guidebox.com/v1.43/US/" + PUBLIC_KEY;
 
-var sourcesArray = [];
+var userSourceChoices = [];
+var defaultSources = ["Amazon","HBO","Hulu","Netflix","Showtime"];
 
 var notes = document.querySelector(".notes-placeholder");
 var howManyMult = document.querySelector(".how-many-mult");
@@ -23,10 +24,9 @@ var search = {
       }  else if (response.results.length > 1){
         search.foundMulti(response);
       } else if (response.results.length === 1){
-        console.log("do something"); ///////// need to put something here
+        related.findSimilar(response.results[0].id);
+        notes.innerHTML = "<p>Found a match! Finding shows you might like...</p>";
       };
-
-
 
     }).fail(function(response){
       console.log("it failed");
@@ -55,7 +55,6 @@ var search = {
 
     // console.log("matching data filled in", matchData);
 
-
     /*******Handlebars template for multiple matches*******/
     var templateSource = document.getElementById("mult-matches-template").innerHTML;
 
@@ -77,15 +76,14 @@ var search = {
 
     for (var i = 0; i < matchEls.length; i++){
       matchEls[i].addEventListener("click",function(){
-        console.log("this",this);
+        // console.log("this",this);
         var dataID = this.getAttribute("data-id");
-        console.log("dataID",dataID);
+        // console.log("dataID",dataID);
 
         notes.innerHTML = "<p>Finding shows you might like...";
         howManyMult.innerHTML = "";
         multMatchesInfo.innerHTML = "";
         related.findSimilar(dataID);
-
       });
     };
 

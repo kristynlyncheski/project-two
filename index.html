@@ -24,11 +24,11 @@
           </label>
 
           <label for="">Choose Your Sources (Defaults to all)
-            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="amazon">Amazon Prime
-            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="hbo">HBO
-            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="hulu">Hulu
-            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="netflix">Netflix
-            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="showtime">Showtime
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Amazon">Amazon Prime
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="HBO">HBO
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Hulu">Hulu
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Netflix">Netflix
+            <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Showtime">Showtime
           </label>
 
           <br><br>
@@ -42,9 +42,9 @@
       </div>
       <!--end of input container-->
 
-      <div class="number-viewers">
+      <!-- <div class="number-viewers">
         <p>Watching with a friend? Click here.</p>
-      </div>
+      </div> -->
 
       <div class="notes-placeholder">
       </div>
@@ -59,6 +59,12 @@
       <div class="content-container">
       </div>
       <!--end of content container-->
+
+      <!--start of details container-->
+      <div class="details-container">
+      </div>
+      <!--end of details container-->
+
 
     </div>
 
@@ -75,6 +81,7 @@
     <script type="text/javascript" src="./scripts/apiKey.js"></script>
     <script type="text/javascript" src="./scripts/search.js"></script>
     <script type="text/javascript" src="./scripts/similar.js"></script>
+    <script type="text/javascript" src="./scripts/details.js"></script>
     <script type="text/javascript" src="./scripts/main.js"></script>
 
 
@@ -91,11 +98,26 @@
 
     <script id="similar-results-template" type="text/x-handlebars-template">
       {{#each similar}}
-      <div class="similar-results-el">
+      <div class="similar-results-el" data-id="{{id}}">
         <p><img src="{{thumbnail}}"></p>
         <p>{{title}}</p>
+        <p>Available on: {{sources}}</p>
+        <p class="details">Details +</p>
       </div>
       {{/each}}
+    </script>
+
+    <script id="show-details-template" type="text/x-handlebars-template">
+      <div class="similar-results-el" data-id="{{id}}">
+        <p><img src="{{thumbnail}}"></p>
+        <p>{{title}}</p>
+        <p>{{summary}}</p>
+        <p>Cast: {{cast}}</p>
+        <p>Genre: {{genre}}</p>
+        <p>Air Date: {{airdate}}</p>
+        <p>IMDb: <a href="http://www.imdb.com/title/{{imdb}}" target="_blank">imdb.com/title/{{imdb}}</a></p>
+        <p>Available on: {{streaming}}</p>
+      </div>
     </script>
 
   </body>
