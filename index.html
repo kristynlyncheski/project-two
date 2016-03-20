@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>What Should I Watch Now?</title>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="./css/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Londrina+Outline|Montserrat:400,700' rel='stylesheet' type='text/css'>
   </head>
@@ -17,25 +19,36 @@
       <!--start of input container-->
       <div class="input-container">
 
-        <form action="">
+        <form class="form" action="">
 
           <label for="">
-            <input type="text" name="show-input" id="show-input" placeholder="Type in a show...">
+            <input type="text" name="show-input" id="show-input" placeholder="Type in a show..." autocomplete="off">
           </label>
 
-          <label for="">Choose Your Sources (Defaults to all)
+          <!--for making a dropdown with checkboxes: http://davidstutz.github.io/bootstrap-multiselect/-->
+
+          <label for="">
+            <select id="source-checkbox" multiple="multiple">
+              <option value="Amazon">Amazon Prime</option>
+              <option value="HBO">HBO</option>
+              <option value="Hulu">Hulu</option>
+              <option value="Netflix">Netflix</option>
+              <option value="Showtime">Showtime</option>
+            </select>
+          </label>
+
+
+          <!-- <label for="">Choose Your Sources (Defaults to all)
             <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Amazon">Amazon Prime
             <input type="checkbox" class="source-checkbox" name="source-checkbox" value="HBO">HBO
             <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Hulu">Hulu
             <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Netflix">Netflix
             <input type="checkbox" class="source-checkbox" name="source-checkbox" value="Showtime">Showtime
-          </label>
+          </label> -->
 
           <br><br>
 
-          <label for="">
-            <button type="button" name="search-button" id="search-button">Search!</button>
-          </label>
+          <button type="button" name="search-button" class="search-button" id="btnSelected">Search!</button>
 
         </form>
 
@@ -61,7 +74,7 @@
       <!--end of content container-->
 
       <!--start of details container-->
-      <div class="details-container">
+      <div class="details-container hide">
       </div>
       <!--end of details container-->
 
@@ -77,6 +90,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
 
+    <!--for dropdown checkboxes plugin-->
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="./scripts/bootstrap-multiselect.js" type="text/javascript"></script>
+
+    <!--intializes the plug-in-->
+    <script type="text/javascript">
+      $(function () {
+        $('#source-checkbox').multiselect({
+          includeSelectAllOption: true
+        });
+        $('#btnSelected').click(function () {
+          var selected = $("#source-checkbox option:selected");
+          console.log("selected",selected);
+          userSourceChoices = [];
+          if (selected.length > 0){
+            selected.each(function () {
+                userSourceChoices.push($(this).val());
+            });
+          } else {
+            userSourceChoices = defaultSources;
+          };
+        });
+      });
+    </script>
+
+
 
     <script type="text/javascript" src="./scripts/apiKey.js"></script>
     <script type="text/javascript" src="./scripts/search.js"></script>
@@ -90,8 +129,10 @@
     <script id="mult-matches-template" type="text/x-handlebars-template">
       {{#each multiple}}
       <div class="mult-matches-el" data-id="{{id}}">
-        <p><img src="{{thumbnail}}"</p>
-        <p>{{title}}</p>
+        <div class="inside-container">
+          <p><img class="thumbnails" src="{{thumbnail}}"</p>
+          <p>{{title}}</p>
+        </div>
       </div>
       {{/each}}
     </script>
@@ -99,24 +140,26 @@
     <script id="similar-results-template" type="text/x-handlebars-template">
       {{#each similar}}
       <div class="similar-results-el" data-id="{{id}}">
-        <p><img src="{{thumbnail}}"></p>
-        <p>{{title}}</p>
-        <p>Available on: {{sources}}</p>
-        <p class="details">Details +</p>
+        <div class="inside-container">
+          <p><img class="thumbnails" src="{{thumbnail}}"></p>
+          <h3>{{title}}</h3>
+          <p>Available on: {{sources}}</p>
+          <p class="details">Details +</p>
+        </div>
       </div>
       {{/each}}
     </script>
 
     <script id="show-details-template" type="text/x-handlebars-template">
-      <div class="similar-results-el" data-id="{{id}}">
-        <p><img src="{{thumbnail}}"></p>
-        <p>{{title}}</p>
+      <div class="show-details-el" data-id="{{id}}">
+        <div class="exit">X</div>
+        <h2>{{title}}</h2>
         <p>{{summary}}</p>
         <p>Cast: {{cast}}</p>
         <p>Genre: {{genre}}</p>
         <p>Air Date: {{airdate}}</p>
         <p>IMDb: <a href="http://www.imdb.com/title/{{imdb}}" target="_blank">imdb.com/title/{{imdb}}</a></p>
-        <p>Available on: {{streaming}}</p>
+        <p>Available on: {{#each streaming}}<img class="streaming-logo" src="./imgs/{{this}}.png">{{/each}}</p>
       </div>
     </script>
 

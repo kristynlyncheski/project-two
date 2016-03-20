@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event){
 
-  var searchBtn = document.getElementById("search-button");
+  var searchBtn = document.querySelector(".search-button");
 
   var inputBox = document.getElementById("show-input");
 
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event){
     if (e.keyCode == 13) {
       e.preventDefault();
       onSearchClick();
-      console.log("hello");
+      // console.log("enter key was pressed");
     };
   });
 
@@ -29,18 +29,24 @@ document.addEventListener("DOMContentLoaded", function(event){
     howManyMult.innerHTML = "";
     multMatchesInfo.innerHTML = "";
     similarContent.innerHTML = "";
-    detailsContainer.innerHTML = "";
-    notes.innerHTML = "<p>Searching...</p>";
 
-    var sourcesInput = document.querySelectorAll(".source-checkbox:checked");
-    // console.log("sourcesInput",sourcesInput);
-    if (sourcesInput.length > 0){
-      for (var i = 0; i < sourcesInput.length; i++){
-        userSourceChoices.push(sourcesInput[i].value);
-      };
-    } else {
-      userSourceChoices = defaultSources;
-    }
+    detailsContainer.innerHTML = "";
+    detailsContainer.classList.add("hide");
+    detailsContainer.style.background = "none";
+
+    notes.innerHTML = "<p class='notes-larger'>Searching...</p><p><img class='loading-gif' src='./imgs/loading-tv.gif'></p>";
+
+    // var sourcesInput = document.querySelectorAll("source-checkbox:checked");
+    // // console.log("sourcesInput",sourcesInput);
+    // if (sourcesInput.length > 0){
+    //   for (var i = 0; i < sourcesInput.length; i++){
+    //     userSourceChoices.push(sourcesInput[i].value);
+    //   };
+    // } else {
+    //   userSourceChoices = defaultSources;
+    // }
+
+    console.log("userSourceChoices",userSourceChoices);
 
     // console.log("userSourceChoices",userSourceChoices);
 

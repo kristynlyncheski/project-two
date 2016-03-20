@@ -4,6 +4,7 @@ var userSourceChoices = [];
 var defaultSources = ["Amazon","HBO","Hulu","Netflix","Showtime"];
 
 var notes = document.querySelector(".notes-placeholder");
+// var multContainer = document.querySelector(".mult-matches-container");
 var howManyMult = document.querySelector(".how-many-mult");
 var multMatchesInfo = document.querySelector(".mult-matches");
 
@@ -25,7 +26,7 @@ var search = {
         search.foundMulti(response);
       } else if (response.results.length === 1){
         related.findSimilar(response.results[0].id);
-        notes.innerHTML = "<p>Found a match! Finding shows you might like...</p>";
+        notes.innerHTML = "<p class='notes-larger'>Finding shows like " + response.results[0].title + "...</p><p><img class='loading-gif' src='./imgs/loading-tv.gif'></p>";
       };
 
     }).fail(function(response){
@@ -38,6 +39,7 @@ var search = {
 
   foundMulti: function(response){
     notes.innerHTML = "";
+    // multContainer.classList.remove("hide");
     howManyMult.innerHTML = ("We found " + response.results.length + " possible matches. Which did you want?");
 
     var matchData = {
@@ -64,7 +66,6 @@ var search = {
 
     multMatchesInfo.innerHTML = computedHtml;
 
-
     search.multiClickInit(matchData);
 
   }, // end of foundMulti
@@ -80,9 +81,10 @@ var search = {
         var dataID = this.getAttribute("data-id");
         // console.log("dataID",dataID);
 
-        notes.innerHTML = "<p>Finding shows you might like...";
+        notes.innerHTML = "<p class='notes-larger'>Finding shows like " + this.innerText + "...</p><p><img class='loading-gif' src='./imgs/loading-tv.gif'></p>";
         howManyMult.innerHTML = "";
         multMatchesInfo.innerHTML = "";
+        // multContainer.classList.add("hide");
         related.findSimilar(dataID);
       });
     };

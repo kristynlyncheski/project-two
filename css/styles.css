@@ -4,10 +4,20 @@
   font-family: 'Montserrat', Arial, sans-serif;
   font-weight:400;
   text-align:center;
+  color:#2a2b2a;
 }
 
 body {
   background: #f8f4e3;
+}
+
+.hide {
+  display:none;
+}
+
+.loading-gif {
+  margin:0 auto;
+  max-width:100px;
 }
 
 h1 {
@@ -15,6 +25,10 @@ h1 {
   color: #ff8966;
   font-size:100px;
   margin:30px 0;
+}
+
+.form > label {
+  margin:0 50px 10px 50px;
 }
 
 #show-input {
@@ -25,9 +39,40 @@ h1 {
   box-shadow: 0px 2px 0px rgba(42, 43, 42, 0.35);
   width:300px;
   outline:none;
+  height: 35px;
 }
 
-#search-button {
+/*Dropdown styles*/
+.btn-group > button {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #2a2b2a;
+  box-shadow: 0px 2px 0px rgba(42, 43, 42, 0.35);
+  width:300px;
+  outline:none;
+  border-radius: 0;
+  padding:0;
+  height: 35px;
+  top: -3px;
+}
+
+.btn-group > button > span {
+  color:#706c61;
+  font-size: 18px;
+}
+
+.multiselect-container {
+  width:300px;
+}
+
+.checkbox  {
+  text-align:left;
+}
+
+
+
+
+.search-button {
   background:#4682a2;
   color:#f8f4e3;
   font-family:'Londrina Outline', cursive;
@@ -39,15 +84,63 @@ h1 {
   cursor:pointer;
 }
 
+.notes-larger {
+  font-size:40px;
+  margin:20px;
+  font-weight:700;
+}
+
+/* Multiple Matches Styles */
+
+.mult-matches-container {
+  margin:30px 0;
+  /*border-top:1px solid #2a2b2a;*/
+}
+
+.how-many-mult {
+  margin:20px;
+  font-size:30px;
+}
 
 .mult-matches {
   display:flex;
   flex-flow:row wrap;
   justify-content:center;
+  margin:10px 0;
 }
+
 .mult-matches-el {
   width:20%;
+  margin-bottom:10px;
 }
+
+/* For Mult Matches and Siimlar Shows */
+
+.inside-container {
+  width:100%;
+  max-width:228px;
+  padding: 0 10px;
+  margin:0 auto;
+}
+
+.inside-container h3,
+.inside-container p {
+  text-align:left;
+  margin:5px 0;
+  font-size:15px;
+}
+
+.inside-container h3{
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size:16px;
+  font-weight:700;
+}
+
+.thumbnails {
+  width:100%;
+}
+
+/* Similar Shows Styles */
 
 .content-container {
   display:flex;
@@ -61,4 +154,46 @@ h1 {
 
 .similar-results-el {
   cursor:pointer;
+}
+
+.details {
+  text-decoration: underline;
+}
+
+/* Details Styles */
+
+.details-container {
+  width:95%;
+  /*background:#c2beaf;*/
+  text-align:left;
+  padding:20px 50px;
+  margin:20px auto;
+  position:relative;
+}
+
+.exit {
+  position: absolute;
+  left: 95%;
+  top: 5%;
+  font-size: 22px;
+  font-weight: 700;
+  cursor:pointer;
+}
+
+.show-details-el h2,
+.show-details-el p {
+  text-align:left;
+}
+
+.show-details-el h2 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color:#4682a2;
+  font-size:30px;
+  font-weight:700;
+  margin:10px 0;
+}
+
+.streaming-logo {
+  height:20px;
+  margin: 0 10px;
 }

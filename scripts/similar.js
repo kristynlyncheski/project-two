@@ -17,6 +17,11 @@ var related = {
       similarArray = similarArray.reverse(); // because the availContent fxn loops backwards
       console.log("similarArray",similarArray);
 
+      if (similarArray.length <= 0){
+        notes.innerHTML = "<p>Sorry, couldn't find a match! Try another search!</p>";
+        return;
+      }
+
 
       // start of internal available_content fxn
 
@@ -48,8 +53,14 @@ var related = {
 
             if (n > 0 && availMatched.length < 5) {          // If i > 0, keep going
               delayedAvailContent(n - 1);       // Call the loop again, and pass it the current value of i
-            } else{
+            } else {
               // console.log("all done...");
+
+              if (availMatched.length <= 0){
+                notes.innerHTML = "<p>Sorry, couldn't find a match! Try another search!</p>";
+                return;
+              };
+
               console.log("availMatched", availMatched);
               related.showSimilar(availMatched);
               // details.loadShowDetails(availMatched);

@@ -9,6 +9,10 @@ var details = {
 
     for (var i = 0; i < showDetailsEl.length; i++){
       showDetailsEl[i].addEventListener("click",function(){
+        detailsContainer.classList.remove("hide");
+        detailsContainer.style.background = "none";
+        detailsContainer.style.padding = "5px 50px 20px 50px";
+        detailsContainer.innerHTML = "<p><img class='loading-gif' src='./imgs/loading-tv.gif'></p>";
         details.getShowDetails(this.getAttribute("data-id"));
       }); // end of event listener for all similar els
     }; // end of for loop
@@ -55,7 +59,7 @@ var details = {
          },
          airdate: response.first_aired,
          imdb: response.imdb_id,
-         streaming: details.findMatchByID(showID).default_source_matches.join(", "), // fix this
+         streaming: details.findMatchByID(showID).default_source_matches, /*.join(", "),*/
        };
 
        details.appendData(showDetails);
@@ -91,7 +95,15 @@ var details = {
 
     var computedHtml = template(showDetails);
 
+    detailsContainer.style.padding = "20px 50px";
+    detailsContainer.style.background = "#c2beaf";
     detailsContainer.innerHTML = computedHtml;
+
+    var exit = document.querySelector(".exit");
+    exit.addEventListener("click",function(){
+      detailsContainer.innerHTML = "";
+      detailsContainer.classList.add("hide");
+    })
 
   }, // end of appendData
 
