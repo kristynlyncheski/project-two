@@ -69,6 +69,10 @@ h1 {
   text-align:left;
 }
 
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus {
+  background: #4682a2;
+}
+
 
 
 
